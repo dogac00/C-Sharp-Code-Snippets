@@ -35,3 +35,13 @@ public class Kata
 // First a create a Enumerable with counts of occurences of elements in it.
 
 // I tried to get something like this. Then I see it in the best solutions.
+
+using System.Linq;
+
+public class Kata
+{
+  public static int DuplicateCount(string str)
+  {
+    return str.ToLower().GroupBy(c => c).Where(g => g.Count() > 1).Count();
+  }
+}
