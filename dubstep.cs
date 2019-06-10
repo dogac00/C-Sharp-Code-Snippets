@@ -35,4 +35,9 @@ public class Dubstep
 
           return String.Join(' ', arr);
         }
+  
+        public static string SongDecoderRegex(string input)
+        { 
+           return Regex.Replace(input, "(WUB)+", " " ).Trim();
+        }
     }
