@@ -31,4 +31,7 @@ public class Kata
     
     return (char)(array[0] - 1);
   }
+  
+  public static char FindMissingLetterFunctional(char[] array) => 
+    (char)Enumerable.Range(array[0], 25).First(x => !array.Contains((char)x));
 }
