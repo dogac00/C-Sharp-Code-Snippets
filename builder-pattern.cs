@@ -1,6 +1,6 @@
-public class StudentBuilder
+class StudentBuilder
 {
-    private String _name;
+    private string _name;
     private int _age = 15;      // this has a default
     private String _motto = ""; // most students don't have one
 
@@ -11,7 +11,7 @@ public class StudentBuilder
         return new Student(_name, _age, _motto);
     }
 
-    public StudentBuilder name(String _name)
+    public StudentBuilder name(string _name)
     {
         this._name = _name;
         return this;
@@ -23,7 +23,7 @@ public class StudentBuilder
         return this;
     }
 
-    public StudentBuilder motto(String _motto)
+    public StudentBuilder motto(string _motto)
     {
         this._motto = _motto;
         return this;
