@@ -26,8 +26,6 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using Microsoft.EntityFrameworkCore.SqlServer.Query.ExpressionTranslators.Internal;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace ConsoleApp1
 {
