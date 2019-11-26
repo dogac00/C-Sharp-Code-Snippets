@@ -21,23 +21,64 @@ songDecoder("WUBWEWUBAREWUBWUBTHEWUBCHAMPIONSWUBMYWUBFRIENDWUB")
 */
 
 using System;
+using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.RegularExpressions;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.ExpressionTranslators.Internal;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
-public class Dubstep
+namespace ConsoleApp1
+{
+    public class Program
     {
-        public static string SongDecoder(string input)
+        public static void Main(string[] args)
         {
-          var arr = input
-                .Split("WUB")
-                .ToList()
-                .Where(s => s != "")
-                .ToArray();
+            Stopwatch stopwatch = Stopwatch.StartNew();
 
-          return String.Join(' ', arr);
+            for (int i = 0; i < 1000000; i++)
+            {
+                string result = FastestSongDecoder("WUBWEWUBAREWUBWUBTHEWUBCHAMPIONSWUBMYWUBFRIENDWUB");
+            }
+
+            Console.WriteLine(stopwatch.ElapsedMilliseconds);
         }
-  
-        public static string SongDecoderRegex(string input)
-        { 
-           return Regex.Replace(input, "(WUB)+", " " ).Trim();
+
+        private static string FastestSongDecoder(string input)
+        {
+            var arr = input.Split("WUB");
+            
+            StringBuilder sb = new StringBuilder();
+
+            bool isFirst = true;
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] == "")
+                    continue;
+
+                var toAppend = isFirst ? arr[i] : string.Concat(" ", arr[i]);
+
+                isFirst = false;
+
+                sb.Append(toAppend);
+            }
+
+            return sb.ToString();
+        }
+
+        private static string SongDecoder(string input)
+        {
+            return input
+                .Split("WUB")
+                .Where(s => s != "")
+                .Aggregate((s1, s2) => string.Concat(s1, " ", s2));
+        }
+
+        private static string SongDecoderRegex(string input)
+        {
+            return Regex.Replace(input, "(WUB)+", " ").Trim();
         }
     }
+}
