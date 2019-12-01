@@ -1,6 +1,7 @@
 class MyLinkedList<T>
     {
         private Node head;
+        private Node tail;
 
         class Node
         {
@@ -16,35 +17,31 @@ class MyLinkedList<T>
 
         public void AddToHead(T item)
         {
+            Node newNode = new Node(item);
+
             if (head is null)
             {
-                head = new Node(item);
+                head = tail = newNode;
             }
             else
             {
-                Node node = new Node(item);
-
-                node.Next = head;
-                head = node;
+                newNode.Next = head;
+                head = newNode;
             }
         }
 
         public void AddToTail(T item)
         {
+            Node newNode = new Node(item);
+
             if (head is null)
             {
-                head = new Node(item);
+                head = tail = newNode;
             }
             else
             {
-                Node node = head;
-
-                for ( ; node.Next != null; node = node.Next)
-                    ;
-
-                Node toAdd = new Node(item);
-                node.Next = toAdd;
-                toAdd.Next = null;
+                tail.Next = newNode;
+                tail = newNode;
             }
         }
 
@@ -71,15 +68,14 @@ class MyLinkedList<T>
         public void Clear()
         {
             head = null;
+            tail = null;
         }
 
-        public void Traverse()
+        public void Traverse(Action<T> action)
         {
             for (Node node = head; node != null; node = node.Next)
             {
-                Console.Write($"{node.Item} => ");
+                action(node.Item);
             }
-
-            Console.Write("NULL");
         }
     }
