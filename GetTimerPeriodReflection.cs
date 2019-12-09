@@ -1,4 +1,26 @@
-public static uint GetPeriod(Timer timer)
+using System;
+using System.Reflection;
+using System.Threading;
+
+class Program
+{
+  static void Main(string[] args)
+  {
+      void Action(object o) => Console.WriteLine("Hello");
+
+      Timer timer = new Timer(new TimerCallback((Action<object>) Action), null, 15000, 12000);
+
+      long val = GetPeriod(timer);
+
+      Console.WriteLine(val);
+
+      Console.Read();
+  }
+}
+
+static class TimerExtensions
+{
+  public static uint GetPeriod(this Timer timer)
   {
       object mTimer = timer.GetType().GetField("m_timer",
               BindingFlags.NonPublic | BindingFlags.Instance)
@@ -14,3 +36,5 @@ public static uint GetPeriod(Timer timer)
 
       return (uint) period;
   }
+}
+  
