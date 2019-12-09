@@ -1,4 +1,4 @@
-public static long GetPeriod(Timer timer)
+public static uint GetPeriod(Timer timer)
   {
       object mTimer = timer.GetType().GetField("m_timer",
               BindingFlags.NonPublic | BindingFlags.Instance)
@@ -12,5 +12,5 @@ public static long GetPeriod(Timer timer)
               BindingFlags.NonPublic | BindingFlags.Instance)
           .GetValue(mTimerTimer);
 
-      return (long) period;
+      return (uint) period;
   }
