@@ -27,5 +27,17 @@ namespace TestArrayLength
             fixed (int* ptr = arr)
                 return ptr != null ? ptr[-2] : 0;
         }
+        
+        // The examples above only works with integers
+        // and in a 64-bit build
+        // Here is the generic version of it
+        // This works with all unmanaged data types and structs
+        private static unsafe int GetLength<T>(T[] arr) where T : unmanaged  
+        {  
+            fixed (T* ptr = arr)      
+                return ptr == null                 
+                        ? 0                  
+                        : ((int*)ptr)[-(sizeof(IntPtr) / sizeof(int))]; 
+        }
     }
 }
