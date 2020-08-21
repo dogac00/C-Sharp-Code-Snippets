@@ -1,6 +1,6 @@
 using System;
 
-namespace KafkaSamples.Extensions
+namespace Extensions
 {
     public static class ArrayExtensions
     {
