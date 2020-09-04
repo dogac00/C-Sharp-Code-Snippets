@@ -1,4 +1,4 @@
-public static string GetN0String(int value)
+public static string GetValueOrAdd(int value)
 {
     if (!_nZeroDictionary.TryGetValue(value, out _))
     {
